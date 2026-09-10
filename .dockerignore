@@ -1,0 +1,8 @@
+node_modules
+.next
+runtime
+.env*
+.git
+.vercel
+knowledge/transcripts
+knowledge/private-roasts

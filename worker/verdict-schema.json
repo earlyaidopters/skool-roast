@@ -1,0 +1,11 @@
+{
+  "type": "object", "additionalProperties": false, "required": ["verdicts"],
+  "properties": {
+    "verdicts": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "verdict", "reason"],
+      "properties": {
+        "id": { "type": "string" },
+        "verdict": { "type": "string", "enum": ["pass", "fail", "skip"] },
+        "reason": { "type": "string", "description": "One sentence, quoting the page where useful. Under 30 words." }
+      } } }
+  }
+}

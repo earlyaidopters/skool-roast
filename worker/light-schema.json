@@ -1,0 +1,76 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verdict",
+    "summary",
+    "notes",
+    "rewritten_headline"
+  ],
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "description": "One playful, blunt sentence."
+    },
+    "summary": {
+      "type": "string",
+      "description": "Two to four sentences on the copy and visuals."
+    },
+    "notes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "roast",
+          "fix",
+          "source"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "roast": {
+            "type": "string",
+            "description": "One playful jab, under 18 words."
+          },
+          "fix": {
+            "type": "string",
+            "description": "Under 35 words."
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "video_title",
+              "video_url",
+              "timestamp",
+              "speaker"
+            ],
+            "properties": {
+              "video_title": {
+                "type": "string"
+              },
+              "video_url": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string"
+              },
+              "speaker": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "rewritten_headline": {
+      "type": "string",
+      "description": "One better sidebar headline, under 150 characters."
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verdict",
+    "summary",
+    "issues",
+    "ideal",
+    "cover_image_prompt"
+  ],
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "description": "One playful, blunt sentence. A roast, not a report."
+    },
+    "summary": {
+      "type": "string",
+      "description": "Three to five sentences: what the copy and visuals do well, then what is costing them members."
+    },
+    "issues": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "target",
+          "quote",
+          "severity",
+          "title",
+          "roast",
+          "detail",
+          "fix",
+          "source",
+          "slot"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "cover",
+              "name",
+              "sidebar_headline",
+              "body",
+              "media",
+              "attachment",
+              "general"
+            ]
+          },
+          "quote": {
+            "type": "string",
+            "description": "For target=body: the exact sentence or line from the About body this points at, copied verbatim. Otherwise empty string."
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "description": "Under 8 words."
+          },
+          "roast": {
+            "type": "string",
+            "description": "One playful jab, under 18 words. Funny, never cruel."
+          },
+          "detail": {
+            "type": "string",
+            "description": "What is wrong, plainly. Under 40 words."
+          },
+          "fix": {
+            "type": "string",
+            "description": "The concrete rewrite or change. For copy, give the replacement line. Under 40 words."
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "video_title",
+              "video_url",
+              "timestamp",
+              "speaker"
+            ],
+            "properties": {
+              "video_title": {
+                "type": "string"
+              },
+              "video_url": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string"
+              },
+              "speaker": {
+                "type": "string"
+              }
+            }
+          },
+          "slot": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6,
+            "description": "For target=attachment: which slot (1 = main video/VSL, 2..6 = the thumbnails left to right). Otherwise 0."
+          }
+        }
+      }
+    },
+    "ideal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sidebar_headline",
+        "about_body",
+        "cover_direction",
+        "media_plan"
+      ],
+      "properties": {
+        "sidebar_headline": {
+          "type": "string",
+          "description": "The short description under the community name in the sidebar. Outcome first. Under 150 characters."
+        },
+        "about_body": {
+          "type": "string",
+          "description": "The full rewritten About body, plain text with line breaks. First line is the headline. Use unicode bold (\ud835\uddf9\ud835\uddf6\ud835\uddf8\ud835\uddf2 \ud835\ude01\ud835\uddf5\ud835\uddf6\ud835\ude00) for the headline and 2 to 4 key phrases only. Keep every fact true to their page."
+        },
+        "cover_direction": {
+          "type": "string",
+          "description": "What the sidebar cover image should show. Under 40 words."
+        },
+        "media_plan": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slot",
+              "current",
+              "action",
+              "should_show"
+            ],
+            "properties": {
+              "slot": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6
+              },
+              "current": {
+                "type": "string",
+                "description": "What is in this slot now, or 'empty'."
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "keep",
+                  "replace",
+                  "remove",
+                  "add"
+                ]
+              },
+              "should_show": {
+                "type": "string",
+                "description": "What this slot should show, one sentence. For keep, say why it earns the slot."
+              }
+            }
+          },
+          "description": "One entry per slot 1..6, in display order. Slot 1 is the main video."
+        }
+      }
+    },
+    "cover_image_prompt": {
+      "type": "string"
+    }
+  }
+}
